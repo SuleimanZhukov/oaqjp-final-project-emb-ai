@@ -11,6 +11,10 @@ def get_index_template():
 def detect_emotion():
     text_to_analyze = request.args.get("textToAnalyze")
     response = emotion_detector(text_to_analyze)
+
+    if response['dominant_emotion'] == None:
+        return "Invalid text! Please try again!"
+
     return "For the given statement, the system response is 'anger': {}, 'disgust': {}, 'fear': {}, 'joy': {} and 'sadness': {}. The dominant emotion is {}".format(
             response['anger'],
             response['disgust'],
